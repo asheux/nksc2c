@@ -96,35 +96,6 @@ const commonThemes = {
   },
 };
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: "#000000",
-    },
-    text: {
-      primary: "#BFBFBF",
-    },
-  },
-  ...commonThemes,
-  components: {
-    MuiDateCalendar: {
-      styleOverrides: {
-        root: {
-          backgroundColor: "#000000",
-        },
-      },
-    },
-    MuiPickersCalendarHeader: {
-      styleOverrides: {
-        root: {
-          backgroundColor: "#35495E",
-        },
-      },
-    },
-  },
-});
-
 const lightTheme = createTheme({
   palette: {
     mode: "light",

@@ -42,8 +42,7 @@ export const LinearProgressWithLabel = (
   );
 };
 
-
-export const Loader = props => {
+export const Loader = (props) => {
   const { size, offset, numberOfBars } = props;
 
   const bars = [];
@@ -59,7 +58,8 @@ export const Loader = props => {
           width: size,
           color: "gray",
         }}
-        spacing={1}>
+        spacing={1}
+      >
         {bars}
       </Stack>
     </>

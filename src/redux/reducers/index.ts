@@ -4,7 +4,7 @@ import nksnotebooksReducer from "./nksnotebooks";
 
 const rootReducer = combineReducers({
   nkscontributor: nkscontributorReducer,
-  nksnotebooks: nksnotebooksReducer
+  nksnotebooks: nksnotebooksReducer,
 });
 
 export default rootReducer;

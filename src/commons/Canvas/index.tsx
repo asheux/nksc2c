@@ -1,28 +1,35 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Box } from '@mui/material';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CancelIcon from '@mui/icons-material/Cancel';
+import React, { useEffect, useRef, useState } from "react";
+import { Box } from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
 
-import { Loader  } from "src/commons/Loader";
+import { Loader } from "src/commons/Loader";
 import { workerCode } from "src/imageWorker";
 import { colorMap } from "src/helpers";
 
 const imageCache = new Map();
 
-export const ImageCanvas = ({ rgbData, fixedWidth = 50, fixedHeight = 50, imageKey }) => {
+export const ImageCanvas = ({
+  rgbData,
+  fixedWidth = 50,
+  fixedHeight = 50,
+  imageKey,
+}) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
   const canvasRef = useRef(null);
-  
+
   useEffect(() => {
-    if (!rgbData || rgbData.length === 0) return;
+    if (!rgbData || rgbData.length === 0) {
+      return;
+    }
     let isMounted = true;
-    
+
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const blob = new Blob([workerCode], { type: 'application/javascript' });
+    const ctx = canvas.getContext("2d");
+    const blob = new Blob([workerCode], { type: "application/javascript" });
     const worker = new Worker(URL.createObjectURL(blob));
-    
+
     if (imageCache.has(imageKey)) {
       const cachedImage = imageCache.get(imageKey);
       canvas.width = fixedWidth;
@@ -35,18 +42,22 @@ export const ImageCanvas = ({ rgbData, fixedWidth = 50, fixedHeight = 50, imageK
       worker.postMessage({ rgbData });
       worker.onmessage = function (e) {
         const { imageDataArray, originalWidth, originalHeight } = e.data;
-        const imageData = new ImageData(imageDataArray, originalWidth, originalHeight);
-        
+        const imageData = new ImageData(
+          imageDataArray,
+          originalWidth,
+          originalHeight,
+        );
+
         const fixedWidth = 50;
-        const fixedHeight =  originalHeight <= 50 ? originalHeight : 50;
-        
+        const fixedHeight = originalHeight <= 50 ? originalHeight : 50;
+
         canvas.width = fixedWidth;
         canvas.height = fixedHeight;
 
-        const offCanvas = document.createElement('canvas');
+        const offCanvas = document.createElement("canvas");
         offCanvas.width = originalWidth;
         offCanvas.height = originalHeight;
-        const offCtx = offCanvas.getContext('2d');
+        const offCtx = offCanvas.getContext("2d");
         offCtx.putImageData(imageData, 0, 0);
 
         ctx.drawImage(
@@ -58,7 +69,7 @@ export const ImageCanvas = ({ rgbData, fixedWidth = 50, fixedHeight = 50, imageK
           0,
           0,
           fixedWidth,
-          fixedHeight
+          fixedHeight,
         );
         imageCache.set(imageKey, offCanvas);
 
@@ -68,12 +79,12 @@ export const ImageCanvas = ({ rgbData, fixedWidth = 50, fixedHeight = 50, imageK
         worker.terminate();
       };
     }
-    
+
     worker.onerror = function (error) {
-      console.error('Worker error:', error);
+      console.error("Worker error:", error);
       worker.terminate();
     };
-    
+
     return () => {
       isMounted = false;
       worker.terminate();
@@ -84,17 +95,14 @@ export const ImageCanvas = ({ rgbData, fixedWidth = 50, fixedHeight = 50, imageK
     <Box sx={{ padding: 2, height: 50 }}>
       {!isLoaded && (
         <Box sx={{ padding: 0 }}>
-          <Loader
-            size={50}
-            numberOfBars={4}
-          />
+          <Loader size={50} numberOfBars={4} />
         </Box>
       )}
       <canvas
         ref={canvasRef}
-        style={{ 
-          border: '1px solid black',
-          display: !isLoaded ? "none" : "block"
+        style={{
+          border: "1px solid black",
+          display: !isLoaded ? "none" : "block",
         }}
         width={fixedWidth}
         height={fixedHeight}
@@ -105,76 +113,72 @@ export const ImageCanvas = ({ rgbData, fixedWidth = 50, fixedHeight = 50, imageK
 
 export const PageStatus = (props) => {
   const { status } = props;
-  
+
   const statusComponent = (key) => {
     const components = {
       unapproved: (
-        <CancelIcon 
+        <CancelIcon
           color="primary"
           fontSize="small"
           sx={{
             color: colorMap.unapproved,
-            position: 'absolute',
+            position: "absolute",
             top: -10,
             right: -10,
           }}
         />
       ),
       approved: (
-        <CheckCircleIcon 
+        <CheckCircleIcon
           color="primary"
           fontSize="small"
           sx={{
             color: colorMap.approved,
-            position: 'absolute',
+            position: "absolute",
             top: -10,
             right: -10,
           }}
         />
       ),
       good: (
-        <CheckCircleIcon 
+        <CheckCircleIcon
           color="primary"
           fontSize="small"
           sx={{
             color: colorMap.good,
-            position: 'absolute',
+            position: "absolute",
             top: -10,
             right: -10,
           }}
         />
       ),
       untouched: (
-        <CancelIcon 
+        <CancelIcon
           color="primary"
           fontSize="small"
           sx={{
             color: colorMap.untouched,
-            position: 'absolute',
+            position: "absolute",
             top: -10,
             right: -10,
           }}
         />
       ),
       pending: (
-        <CheckCircleIcon 
+        <CheckCircleIcon
           color="primary"
           fontSize="small"
           sx={{
             color: colorMap.pending,
-            position: 'absolute',
+            position: "absolute",
             top: -10,
             right: -10,
           }}
         />
       ),
-    }
-    return components[key]
-  }
-  
-  return (
-    <>
-      {statusComponent(status)}
-    </>
-  )
-}
+    };
+    return components[key];
+  };
+
+  return <>{statusComponent(status)}</>;
+};

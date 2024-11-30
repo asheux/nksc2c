@@ -1,22 +1,10 @@
 import React from "react";
-import {
-  TextField,
-  Typography,
-  Paper,
-  IconButton,
-  InputBase,
-  Box,
-} from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import { useTheme } from "@mui/material/styles";
+import { TextField, Typography } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
 
 // App related imports
-import { StyledToolbar } from "src/commons/Toolbar";
-
 import { isMobile } from "src/helpers";
-import { customStyles } from "src/styles";
 
 export const StyledInput = styled(TextField)({
   "& label.Mui-focused": {

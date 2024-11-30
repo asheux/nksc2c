@@ -45,8 +45,8 @@ export const nksChapters = [
           "page0037a_rule110-big.5",
           "page0871e_r30fluct",
           "page0871g_r30rw2",
-        ]
-      }
+        ],
+      },
     },
   },
   {
@@ -64,16 +64,13 @@ export const nksChapters = [
           "page0884a_optimalMachine",
           "page0885b_r2grids",
           "page0886a_r2examples",
-          "page0886c_algebraic2"
-        ]
+          "page0886c_algebraic2",
+        ],
       },
       section03: {
         id: 3,
         name: "Mobile Automata",
-        c2cdata: [
-          "page0077a_xma.seq",
-          "page0887a_maperiods",
-        ]
+        c2cdata: ["page0077a_xma.seq", "page0887a_maperiods"],
       },
       section04: {
         id: 4,
@@ -87,7 +84,7 @@ export const nksChapters = [
           "page0081a_tmbig.evol",
           "page0081b_tmbig.comp",
           "page0081c_tmbig.rule",
-        ]
+        ],
       },
       section05: {
         id: 5,
@@ -106,7 +103,7 @@ export const nksChapters = [
           "page0889e_marxen.2",
           "page0889f_marxen.3",
           "page0892b_c-curve",
-        ]
+        ],
       },
       section07: {
         id: 7,
@@ -118,7 +115,7 @@ export const nksChapters = [
           "page0094b_css2.rules",
           "page0094c_css2.plots1",
           "page0094d_css2.plots2x",
-        ]
+        ],
       },
       section08: {
         id: 8,
@@ -130,7 +127,7 @@ export const nksChapters = [
           "page0096a_CTseq",
           "page0096b_CTseq.sum",
           "page0096c_ctplots",
-        ]
+        ],
       },
       section09: {
         id: 9,
@@ -145,7 +142,7 @@ export const nksChapters = [
           "page0100c_rm28.2",
           "page0100d_rm28.3",
           "page0100e_rm28.4",
-        ]
+        ],
       },
       section10: {
         id: 10,
@@ -162,9 +159,9 @@ export const nksChapters = [
           "page0896a_symbreps",
           "page0897b_ruletrees",
           "page0897c_treeseq",
-        ]
-      }
-    }
+        ],
+      },
+    },
   },
   {
     id: 4,
@@ -188,7 +185,7 @@ export const nksChapters = [
           "page0903b_power3",
           "page0904a_3n1stops",
           "page0905b_p6gaps",
-        ]
+        ],
       },
       section04: {
         id: 4,
@@ -200,7 +197,7 @@ export const nksChapters = [
           "page0908b_prcomplex2",
           "page0908c_prgrowth",
           "page0908d_ulam",
-        ]
+        ],
       },
       section05: {
         id: 5,
@@ -225,7 +222,7 @@ export const nksChapters = [
           "page0915c_euclid1",
           "page0915d_euclid2",
           "page0916b_integercomplexity",
-        ]
+        ],
       },
       section06: {
         id: 6,
@@ -235,8 +232,8 @@ export const nksChapters = [
           "page0146a_sines",
           "page0147a_cfcurves",
           "page0148a_zeta",
-          "page0917c_3sumdist"
-        ]
+          "page0917c_3sumdist",
+        ],
       },
       section07: {
         id: 7,
@@ -247,15 +244,12 @@ export const nksChapters = [
           "page0918c_fourier.4",
           "page0919a_chaos.num",
           "page0920a_chaos.num32",
-        ]
+        ],
       },
       section08: {
         id: 8,
         name: "Continuous Cellular Automata",
-        c2cdata: [
-          "page0156a_diffusion.rule",
-          "page0156b_diffusion.grid",
-        ]
+        c2cdata: ["page0156a_diffusion.rule", "page0156b_diffusion.grid"],
       },
       section09: {
         id: 9,
@@ -265,16 +259,14 @@ export const nksChapters = [
           "page0923b_waveD",
           "page0924a_courant",
           "page0924b_pderes",
-        ]
+        ],
       },
       section10: {
         id: 10,
         name: "Continuous Versus Discrete Systems",
-        c2cdata: [
-          "page0925a_parabolic",
-        ]
-      }
-    }
+        c2cdata: ["page0925a_parabolic"],
+      },
+    },
   },
   {
     id: 5,
@@ -298,8 +290,8 @@ export const nksChapters = [
           "page0929a_ulamseq",
           "page0929b_ulamseq2",
           "page0929c_174826",
-          "page0929d_3dca"
-        ]
+          "page0929d_3dca",
+        ],
       },
       section03: {
         id: 3,
@@ -319,7 +311,7 @@ export const nksChapters = [
           "page0930b_cairo-steps",
           "page0930c_cairo-ca-2",
           "page0930e_penrose-ca-2",
-        ]
+        ],
       },
       section04: {
         id: 4,
@@ -340,7 +332,7 @@ export const nksChapters = [
           "page0933b_fract-dim",
           "page0934a_mandel",
           "page0934b_mansequence",
-        ]
+        ],
       },
       section05: {
         id: 5,
@@ -370,7 +362,7 @@ export const nksChapters = [
           "page0936a_sdn",
           "page0936b_sdn-sz",
           "page0936c_dn-dims",
-        ]
+        ],
       },
       section06: {
         id: 6,
@@ -394,7 +386,7 @@ export const nksChapters = [
           "page0209b_mwnet2",
           "page0937a_mwstack",
           "page0937b_mwdots",
-        ]
+        ],
       },
       section07: {
         id: 7,
@@ -415,9 +407,9 @@ export const nksChapters = [
           "page0945a_pell",
           "page0945b_pyth.1",
           "page0945c_pyth.2",
-        ]
-      }
-    }
+        ],
+      },
+    },
   },
   {
     id: 6,
@@ -438,15 +430,12 @@ export const nksChapters = [
           "page0229a_r110.1",
           "page0230a_r110.2",
           "page0947a_center-random",
-        ]
+        ],
       },
       section04: {
         id: 4,
         name: "Systems of Limited Size and Class 2 Behavior",
-        c2cdata: [
-          "page0950b_denombig",
-          "page0950c_additive-periods",
-        ]
+        c2cdata: ["page0950b_denombig", "page0950c_additive-periods"],
       },
       section05: {
         id: 5,
@@ -458,7 +447,7 @@ export const nksChapters = [
           "page0952b_add90",
           "page0952c_add250",
           "page0952d_monoids",
-        ]
+        ],
       },
       section06: {
         id: 6,
@@ -467,7 +456,7 @@ export const nksChapters = [
           "page0266b_r30-rule",
           "page0954a_denplots",
           "page0954c_periodarrays",
-        ]
+        ],
       },
       section07: {
         id: 7,
@@ -488,7 +477,7 @@ export const nksChapters = [
           "page0962f_stgRule45big",
           "page0963a_stgRule110big",
           "page0963b_stgRule170row",
-        ]
+        ],
       },
       section08: {
         id: 8,
@@ -509,9 +498,9 @@ export const nksChapters = [
           "page0965f_life-sfill",
           "page0965g_life-pt-200",
           "page0965h_life-pt-500",
-        ]
-      }
-    }
+        ],
+      },
+    },
   },
   {
     id: 7,
@@ -525,7 +514,7 @@ export const nksChapters = [
           "page0311c_machine-big",
           "page0314a_3body2",
           "page0972a_3bodygallery1",
-        ]
+        ],
       },
       section05: {
         id: 5,
@@ -534,7 +523,7 @@ export const nksChapters = [
           "page0325c_r30transform",
           "page0973a_3bodygallery2",
           "page0973b_3bodyparams",
-        ]
+        ],
       },
       section06: {
         id: 6,
@@ -563,7 +552,7 @@ export const nksChapters = [
           "page0979e_dla",
           "page0979f_746shape",
           "page0980a_shapecomparison",
-        ]
+        ],
       },
       section07: {
         id: 7,
@@ -577,7 +566,7 @@ export const nksChapters = [
           "page0983a_isingTimeEvolve",
           "page0983b_IsingSlice",
           "page0983c_ising.seq",
-        ]
+        ],
       },
       section08: {
         id: 8,
@@ -599,7 +588,7 @@ export const nksChapters = [
           "page0987a_toruscharge",
           "page0987c_vor1",
           "page0987d_vor2",
-        ]
+        ],
       },
       section09: {
         id: 9,
@@ -618,9 +607,9 @@ export const nksChapters = [
           "page0989d_sand1a",
           "page0990a_sand2",
           "page0990b_sand3",
-        ]
-      }
-    }
+        ],
+      },
+    },
   },
   {
     id: 8,
@@ -630,10 +619,7 @@ export const nksChapters = [
       section02: {
         id: 2,
         name: "The Growth of Crystals",
-        c2cdata: [
-          "page0373a_squarerules",
-          "page0993a_hopper",
-        ]
+        c2cdata: ["page0373a_squarerules", "page0993a_hopper"],
       },
       section04: {
         id: 4,
@@ -648,7 +634,7 @@ export const nksChapters = [
           "page0380a_bigpix",
           "page1000a_wave",
           "page1000b_shock",
-        ]
+        ],
       },
       section06: {
         id: 6,
@@ -666,23 +652,19 @@ export const nksChapters = [
           "page1006b_connected",
           "page1008a_circles",
           "page1009a_wrong-shells",
-        ]
+        ],
       },
       section07: {
         id: 7,
         name: "Biological Pigmentation Patterns",
-        c2cdata: [
-          "page1013a_spiralwave",
-        ]
+        c2cdata: ["page1013a_spiralwave"],
       },
       section08: {
         id: 8,
         name: "Financial Systems",
-        c2cdata: [
-          "page1014a_zipf",
-        ]
-      }
-    }
+        c2cdata: ["page1014a_zipf"],
+      },
+    },
   },
   {
     id: 9,
@@ -692,9 +674,7 @@ export const nksChapters = [
       section02: {
         id: 2,
         name: "The Notion of Reversibility",
-        c2cdata: [
-          "page1017a_revca",
-        ]
+        c2cdata: ["page1017a_revca"],
       },
       section03: {
         id: 3,
@@ -705,7 +685,7 @@ export const nksChapters = [
           "page0447a_2dslice",
           "page0447b_paddle",
           "page0449a_entropy",
-        ]
+        ],
       },
       section04: {
         id: 4,
@@ -719,7 +699,7 @@ export const nksChapters = [
           "page0464a_blaver1",
           "page0464b_blaver2",
           "page1022a_xcon",
-        ]
+        ],
       },
       section07: {
         id: 7,
@@ -733,14 +713,12 @@ export const nksChapters = [
           "page0479a_dimensions",
           "page1029a_diameter",
           "page1029b_girth",
-        ]
+        ],
       },
       section08: {
         id: 8,
         name: "The Relationship of Space and Time",
-        c2cdata: [
-          "page0483a_netconstraints",
-        ]
+        c2cdata: ["page0483a_netconstraints"],
       },
       section09: {
         id: 9,
@@ -762,7 +740,7 @@ export const nksChapters = [
           "page0496b_mactrule",
           "page0496c_mact",
           "page1032a_cubicsymmetric",
-        ]
+        ],
       },
       section10: {
         id: 10,
@@ -792,7 +770,7 @@ export const nksChapters = [
           "page1034c_sca-additive",
           "page1034d_sca-random",
           "page1034e_sca-random-1",
-        ]
+        ],
       },
       section11: {
         id: 11,
@@ -805,7 +783,7 @@ export const nksChapters = [
           "page1035b_abca1",
           "page1035c_firing1",
           "page1036a_mwdims",
-        ]
+        ],
       },
       section12: {
         id: 12,
@@ -837,7 +815,7 @@ export const nksChapters = [
           "page1039b_random-pn2",
           "page1039c_closednets",
           "page1039d_clustercounts",
-        ]
+        ],
       },
       section13: {
         id: 13,
@@ -854,14 +832,12 @@ export const nksChapters = [
           "page1040b_nonoverlapdigraph",
           "page1041a_posets",
           "page1042a_relativity",
-        ]
+        ],
       },
       section14: {
         id: 14,
         name: "Elementary Particles",
-        c2cdata: [
-          "page1046a_knots",
-        ]
+        c2cdata: ["page1046a_knots"],
       },
       section15: {
         id: 15,
@@ -873,18 +849,15 @@ export const nksChapters = [
           "page1049a_spheres",
           "page1050a_hyperbolic",
           "page1052a_sprinkle",
-          "page1055a_6j"
-        ]
+          "page1055a_6j",
+        ],
       },
       section16: {
         id: 16,
         name: "Quantum Phenomena",
-        c2cdata: [
-          "page1060a_schrodinger",
-          "page1060b_feynman",
-        ]
-      }
-    }
+        c2cdata: ["page1060a_schrodinger", "page1060b_feynman"],
+      },
+    },
   },
   {
     id: 10,
@@ -894,11 +867,7 @@ export const nksChapters = [
       section05: {
         id: 5,
         name: "Date Compression",
-        c2cdata: [
-          "page0566a_nested",
-          "page0571a_2dptr",
-          "page0571a_2dptr-1",
-        ]
+        c2cdata: ["page0566a_nested", "page0571a_2dptr", "page0571a_2dptr-1"],
       },
       section06: {
         id: 6,
@@ -911,7 +880,7 @@ export const nksChapters = [
           "page1073b_lseq",
           "page1073c_walshcoeffs",
           "page1073d_image-aver",
-        ]
+        ],
       },
       section07: {
         id: 7,
@@ -934,7 +903,7 @@ export const nksChapters = [
           "page1078e_gridoverlaps",
           "page1078f_MoireExamples",
           "page1078g_PeriodicMoire",
-        ]
+        ],
       },
       section08: {
         id: 8,
@@ -943,7 +912,7 @@ export const nksChapters = [
           "page0586a_ss-spectra",
           "page1079a_present",
           "page1079b_chords",
-        ]
+        ],
       },
       section09: {
         id: 9,
@@ -952,7 +921,7 @@ export const nksChapters = [
           "page1082a_caspectra",
           "page1082b_2dss-spectra",
           "page1084a_fitting",
-        ]
+        ],
       },
       section10: {
         id: 10,
@@ -968,7 +937,7 @@ export const nksChapters = [
           "page1089a_r30backtracking",
           "page1089b_btrees-2",
           "page1089c_carecognition",
-        ]
+        ],
       },
       section11: {
         id: 11,
@@ -987,24 +956,19 @@ export const nksChapters = [
           "page1093a_contca",
           "page1096c_nand-sizes",
           "page1097a_nandextras",
-        ]
+        ],
       },
       section12: {
         id: 12,
         name: "Human Thinking",
-        c2cdata: [
-          "page1101a_nn2d",
-          "page1101b_continuous",
-        ]
+        c2cdata: ["page1101a_nn2d", "page1101b_continuous"],
       },
       section13: {
         id: 13,
         name: "Higher Forms of Perception and Analysis",
-        c2cdata: [
-          "page1105a_gamedata",
-        ]
-      }
-    }
+        c2cdata: ["page1105a_gamedata"],
+      },
+    },
   },
   {
     id: 11,
@@ -1014,9 +978,7 @@ export const nksChapters = [
       section03: {
         id: 3,
         name: "The Phenomenon of Universality",
-        c2cdata: [
-          "page1109b_randcomp",
-        ]
+        c2cdata: ["page1109b_randcomp"],
       },
       section04: {
         id: 4,
@@ -1029,7 +991,7 @@ export const nksChapters = [
           "page0650b_ucan.90",
           "page0651a_ucasmall.30",
           "page0651b_ucan.30",
-        ]
+        ],
       },
       section05: {
         id: 5,
@@ -1050,8 +1012,8 @@ export const nksChapters = [
           "page0661c_3n.g",
           "page0662a_logic",
           "page0662b_logic.r",
-          "page0663a_ram"
-        ]
+          "page0663a_ram",
+        ],
       },
       section06: {
         id: 6,
@@ -1106,8 +1068,8 @@ export const nksChapters = [
           "page0672f_tmtorm.6",
           "page0673a_as-rm",
           "page0673b_rm.rule",
-          "page0673c_as.rule"
-        ]
+          "page0673c_as.rule",
+        ],
       },
       section08: {
         id: 8,
@@ -1127,7 +1089,7 @@ export const nksChapters = [
           "page0685a_r110.det2",
           "page0686a_r110.det3",
           "page0688a_multitrack",
-        ]
+        ],
       },
       section10: {
         id: 10,
@@ -1142,7 +1104,7 @@ export const nksChapters = [
           "page1117a_r2class4",
           "page1117b_lifenand",
           "page1117c_wireworld",
-        ]
+        ],
       },
       section11: {
         id: 11,
@@ -1165,7 +1127,7 @@ export const nksChapters = [
           "page0705a_emulsummary",
           "page1118a_r41",
           "page1118b_simulationNetwork",
-        ]
+        ],
       },
       section12: {
         id: 12,
@@ -1194,9 +1156,9 @@ export const nksChapters = [
           "page1120a_utm32",
           "page1120b_tmspikes",
           "page1121a_urm",
-        ]
-      }
-    }
+        ],
+      },
+    },
   },
   {
     id: 12,
@@ -1206,9 +1168,7 @@ export const nksChapters = [
       section03: {
         id: 3,
         name: "The Content of the Principle",
-        c2cdata: [
-          "page0725a_r30array",
-        ]
+        c2cdata: ["page0725a_r30array"],
       },
       section04: {
         id: 4,
@@ -1218,22 +1178,17 @@ export const nksChapters = [
           "page0732a_pde1",
           "page0732b_pde2",
           "page1127a_blockpos",
-        ]
+        ],
       },
       section05: {
         id: 5,
         name: "Explaining the Phenomenon of Complexity",
-        c2cdata: [
-          "page1131a_fmseq"
-        ]
+        c2cdata: ["page1131a_fmseq"],
       },
       section06: {
         id: 6,
         name: "Computational Irreducibility",
-        c2cdata: [
-          "page0744a_reduce",
-          "page0749a_powersof2",
-        ]
+        c2cdata: ["page0744a_reduce", "page0749a_powersof2"],
       },
       section08: {
         id: 8,
@@ -1262,7 +1217,7 @@ export const nksChapters = [
           "page1144a2_TM2",
           "page1144a_TM1",
           "page1144b_beavers-1",
-        ]
+        ],
       },
       section09: {
         id: 9,
@@ -1316,7 +1271,7 @@ export const nksChapters = [
           "page1174b_nandsearch2",
           "page1175a_stdaxthms",
           "page1176a_euclidnet",
-        ]
+        ],
       },
       section10: {
         id: 10,
@@ -1326,17 +1281,17 @@ export const nksChapters = [
           "page1186a_doublenote",
           "page1186b_unseq-2",
           "page1186c_unseq-3",
-          "page1186d_unseq-4"
-        ]
-      }
-    }
+          "page1186d_unseq-4",
+        ],
+      },
+    },
   },
-]
+];
 
 export const colorMap = {
   pending: "orange",
   good: "#64aafa",
   approved: "#00b300",
   unapproved: "#000000",
-  untouched: "#ff4d4d"
-}
+  untouched: "#ff4d4d",
+};

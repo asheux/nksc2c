@@ -6,11 +6,9 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Avatar from "@mui/material/Avatar";
 import { useTheme } from "@mui/material/styles";
 
 // App related imports
-import Footer from "src/commons/Footer";
 import { StyledToolbar } from "src/commons/Toolbar";
 import { isMobile } from "src/helpers";
 import { customStyles } from "src/styles";
@@ -18,9 +16,7 @@ import { customStyles } from "src/styles";
 const nks_logo = "/images/nks-book.png";
 
 const Layout = (props) => {
-  const {
-    children
-  } = props;
+  const { children } = props;
   const theme = useTheme();
 
   return (

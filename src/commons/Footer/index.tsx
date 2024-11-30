@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { isMobile } from "src/helpers";
 
 const Footer = (props) => {
-  const { data, theme } = props;
+  const { data } = props;
 
   return (
     <Paper

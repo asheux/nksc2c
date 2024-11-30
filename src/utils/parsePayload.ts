@@ -1,4 +1,4 @@
-export const parseErrors = errors => ({
+export const parseErrors = (errors) => ({
   name: !!errors["name"],
   social_link: !!errors["social_link"],
   status: !!errors["status"],
@@ -9,7 +9,7 @@ export const parseErrors = errors => ({
   file: !!errors["file"],
 });
 
-export const parseErrorMessages = errors => ({
+export const parseErrorMessages = (errors) => ({
   name: errors["name"] || "",
   social_link: errors["social_link"] || "",
   status: errors["status"] || "",

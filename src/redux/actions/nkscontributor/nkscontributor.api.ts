@@ -1,6 +1,6 @@
 import { getHost } from "src/api";
 
-export const addNKScontributor = data => {
+export const addNKScontributor = (data) => {
   return fetch(`${getHost()}/nksc2c_notebook`, {
     method: "POST",
     headers: {
@@ -8,5 +8,5 @@ export const addNKScontributor = data => {
       Accept: "application/json",
     },
     body: JSON.stringify(data),
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };

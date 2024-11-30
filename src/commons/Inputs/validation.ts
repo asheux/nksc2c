@@ -13,17 +13,13 @@ export const validateName = (name, field) => {
   };
 };
 
-export const validateInput = (
-  inpayload,
-  errors,
-  errorMessages,
-) => {
+export const validateInput = (inpayload, errors, errorMessages) => {
   const { name } = inpayload;
 
   const fieldErrors = errors;
   const fieldErrorMessages = errorMessages;
 
-  Object.keys(inpayload).forEach(field => {
+  Object.keys(inpayload).forEach((field) => {
     const vname = validateName(name, "name");
     if (field === "name" && !vname.valid) {
       fieldErrors[field] = true;

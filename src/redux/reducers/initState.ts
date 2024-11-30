@@ -9,8 +9,8 @@ export default {
     nkscontributor: context,
     nksnotebooks: {
       ...context,
-      data: []
-    }
+      data: [],
+    },
   },
   nkscontributor: {
     name: "",
@@ -18,11 +18,11 @@ export default {
     status: "",
     notebook_name: "",
     notebook_link: "",
-    notebook_chapter: ""
+    notebook_chapter: "",
   },
   uploadPayload: {
     file: null,
-    token: ""
+    token: "",
   },
   errors: {
     name: false,
@@ -41,5 +41,5 @@ export default {
     notebook_link: "",
     notebook_chapter: "",
     token: "",
-  }
+  },
 };
