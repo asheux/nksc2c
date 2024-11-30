@@ -1,12 +1,12 @@
-# Quest List
+# NKS Click to Copy project
 
 ## Run The Project Locally
 
 ### Clone
 
 ```
-$ git clone https://github.com/asheux/tccup.git
-$ cd tccup
+$ git clone https://github.com/asheux/nksc2c.git
+$ cd nksc2c
 ```
 
 ### Install dependencies and Run
@@ -14,5 +14,3 @@ $ cd tccup
 ```
 $ yarn install && yarn start
 ```
-# The Cosmic Clean-Up
-# nksc2c
