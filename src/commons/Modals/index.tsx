@@ -7,16 +7,17 @@ import {
   Stack,
   Checkbox,
   Divider,
+  Chip,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import InfoIcon from "@mui/icons-material/Info";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
-import { StyledButton } from "src/commons/Buttons";
-import { StyledInput } from "src/commons/Inputs";
+import { StyledButton, CustomizedUpload } from "src/commons/Buttons";
+import { StyledInput, ShowError } from "src/commons/Inputs";
 import { NKSTooltip } from "src/commons/Tooltip";
 import { customStyles } from "src/styles";
-import { isMobile } from "src/helpers";
+import { isMobile, statusMap, colorMap } from "src/helpers";
 import { useAppSelector } from "src/hooks";
 
 const mathematica_icon = "/icons/mathematica.svg";
@@ -25,24 +26,29 @@ export const NKSC2CModal = (props) => {
   const {
     open,
     handleClose,
-    loading,
     handleChange,
     errors,
     errorMessages,
     isLinked,
     handleCheckboxChange,
-    payload,
     modaldata,
-    setModalData,
     resetData,
     selectedId,
     handleOpenBook,
     handleSubmitNksContrib,
     token,
     handleUploadChange,
+    handleUpload,
+    disabledUpload,
+    isUploading,
+    openConfirm,
+    handleCloseConfirm,
+    handleConfirmUpload,
+    uploadHasErrors,
+    uMessage,
+    uploadSuccess,
   } = props;
   const [openForm, setOpenForm] = useState(false);
-  const [openConfirm, setOpenConfirm] = useState(false);
 
   const nkscontributor = useAppSelector((state) => state.nkscontributor);
 
@@ -59,14 +65,6 @@ export const NKSC2CModal = (props) => {
 
   const handleCloseForm = () => {
     setOpenForm(false);
-  };
-
-  const handleConfirmUpload = () => {
-    setOpenConfirm(true);
-  };
-
-  const handleCloseConfirm = () => {
-    setOpenConfirm(false);
   };
 
   const handleNotebookDownload = () => {
@@ -106,7 +104,7 @@ export const NKSC2CModal = (props) => {
             variant={isMobile ? "h2" : "h4"}
             sx={{ color: "#b00f00" }}
           >
-            Contribute Code
+            {modaldata.name ? "NKS Click to Copy Code" : "Contribute Code"}
           </Typography>
           {modaldata.name ? (
             <Stack direction="row" spacing={0.5}>
@@ -145,6 +143,18 @@ export const NKSC2CModal = (props) => {
           )}
         </Stack>
         <Divider />
+        <Box>
+          <Typography variant={isMobile ? "h4" : "h6"}>Status</Typography>
+          <Chip
+            label={statusMap[modaldata.status]}
+            sx={{
+              backgroundColor: colorMap[modaldata.status],
+              borderRadius: 5,
+              p: 1,
+              color: "#fff",
+            }}
+          />
+        </Box>
         <Box>
           <Typography variant={isMobile ? "h4" : "h6"}>
             NKS Book Details
@@ -348,6 +358,12 @@ export const NKSC2CModal = (props) => {
             <InfoIcon sx={{ fontSize: isMobile ? 27 : 18, color: "#b00f00" }} />
           </NKSTooltip>
         </Stack>
+        <ShowError
+          show={uploadSuccess || uploadHasErrors}
+          message={uMessage}
+          showBorder={true}
+          color={uploadHasErrors ? "red" : "green"}
+        />
         <Box>
           <StyledButton
             onClick={handleNotebookDownload}
@@ -375,14 +391,24 @@ export const NKSC2CModal = (props) => {
           <StyledButton
             onClick={handleConfirmUpload}
             startIcon={
-              <Box
-                component="img"
-                src={mathematica_icon}
-                sx={{
-                  width: isMobile ? 30 : 20,
-                  height: isMobile ? 30 : 20,
-                }}
-              />
+              isUploading ? (
+                <CircularProgress
+                  variant="indeterminate"
+                  disableShrink
+                  sx={{ color: "#b00f00" }}
+                  size={customStyles.spinnerSize}
+                  thickness={4}
+                />
+              ) : (
+                <Box
+                  component="img"
+                  src={mathematica_icon}
+                  sx={{
+                    width: isMobile ? 30 : 20,
+                    height: isMobile ? 30 : 20,
+                  }}
+                />
+              )
             }
             sx={{
               ...customStyles.buttonStyle,
@@ -429,7 +455,7 @@ export const NKSC2CModal = (props) => {
             </Stack>
             <StyledInput
               id="token"
-              placeholder="928398382"
+              placeholder="398382"
               name="token"
               size="small"
               fullWidth
@@ -443,29 +469,18 @@ export const NKSC2CModal = (props) => {
                 },
               }}
             />
-            <Box>
-              <StyledButton
-                disabled={errors.name}
-                sx={{
-                  fontSize: isMobile ? 30 : 12,
-                  width: isMobile ? "30%" : "20%",
-                  borderRadius: 0,
-                  float: "right",
-                }}
-              >
-                {loading ? (
-                  <CircularProgress
-                    variant="indeterminate"
-                    disableShrink
-                    sx={{ color: "#b00f00" }}
-                    size={customStyles.spinnerSize}
-                    thickness={4}
-                  />
-                ) : (
-                  "Continue"
-                )}
-              </StyledButton>
-            </Box>
+            <Stack spacing={0.5}>
+              <CustomizedUpload
+                handleChange={handleUpload}
+                disabled={disabledUpload}
+              />
+              <ShowError
+                show={errors.file}
+                message={errorMessages.file}
+                showBorder={true}
+                color={"red"}
+              />
+            </Stack>
           </Stack>
         </Modal>
       </Stack>

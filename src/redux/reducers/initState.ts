@@ -11,6 +11,7 @@ export default {
       ...context,
       data: [],
     },
+    uploadnksnb: context,
   },
   nkscontributor: {
     name: "",
@@ -32,6 +33,7 @@ export default {
     notebook_link: false,
     notebook_chapter: false,
     token: false,
+    file: false,
   },
   errorMessages: {
     name: "Invalid name",
@@ -41,5 +43,6 @@ export default {
     notebook_link: "",
     notebook_chapter: "",
     token: "",
+    file: "",
   },
 };

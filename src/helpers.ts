@@ -1295,3 +1295,11 @@ export const colorMap = {
   unapproved: "#000000",
   untouched: "#ff4d4d",
 };
+
+export const statusMap = {
+  pending: "Work in progress",
+  good: "In review process",
+  approved: "Ready to be deployed",
+  unapproved: "Needs more work",
+  untouched: "Open for new contributions",
+};

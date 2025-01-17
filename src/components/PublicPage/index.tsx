@@ -25,7 +25,7 @@ const nksbookimage = "/images/nks-book.png";
 const images_json = "/json/images.json";
 
 const PublicPage = (props) => {
-  const { nkscontributorAction, nksNotebooksAction } = props;
+  const { nkscontributorAction, nksNotebooksAction, uploadnksnbAction } = props;
   const [activeChapter, setActiveChapter] = useState(
     localStorage.chapter || "chapter00",
   );
@@ -46,37 +46,49 @@ const PublicPage = (props) => {
   const [notebooks, setNotebooks] = useState({});
   const [token, setToken] = useState("");
   const [uploadPayload, setUploadPayload] = useState(initState.uploadPayload);
+  const [isUploading, setIsUploadinng] = useState(false);
+  const [uploadHasErrors, setUploadHasErrors] = useState(false);
+  const [uMessage, setUMessage] = useState("");
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
 
-  // const handleUpload = (e) => {
-  //   setIsUploadinng(true);
-  //   const files = e.target.files;
-  //   const file = files[0];
-  //   if (!file) {
-  //     setIsUploadinng(false);
-  //   } else {
-  //     setShowMessage(false);
-  //     setVerificationError(false);
-  //     setVerificationErrorM("");
-  //     setUploadedImage(file);
-  //     setProgress(10);
-  //     // Compress the image to small
-  //     import("compressorjs").then((module) => {
-  //       const Compressor = module.default;
-  //       new Compressor(file, {
-  //         quality: 0.2,
-  //         convertSize: 0,
-  //         mimeType: "image/jpeg",
-  //         success(result) {
-  //           const blobObj = new Blob([result], { type: result.type });
-  //           setBlob(blobObj);
-  //         },
-  //         error(err) {
-  //           console.log(err.message);
-  //         },
-  //       });
-  //     });
-  //   }
-  // };
+  const handleUpload = (e) => {
+    setIsUploadinng(true);
+    const file = e.target.files[0];
+    if (!file) {
+      setIsUploadinng(false);
+      setErrors({ ...errors, file: true });
+      setErrorMessages({
+        ...errorMessages,
+        file: "No file was selected",
+      });
+    } else {
+      handleCloseConfirm();
+      const pdata = {
+        notebook_name: modaldata.notebook_name,
+        file: file,
+        token: uploadPayload.token,
+      };
+      uploadnksnbAction(pdata).then((res) => {
+        if (res.type === "uploadnksnb/failure") {
+          setUploadHasErrors(true);
+          setUMessage(res.payload);
+        } else {
+          setUploadHasErrors(false);
+          setUploadSuccess(true);
+          setModalData(res.payload);
+          setNotebooks({
+            ...notebooks,
+            [res.payload.notebook_name]: res.payload,
+          });
+          setUMessage(
+            "Thank you for your contribution. Please wait for the review process to be done.",
+          );
+        }
+        setIsUploadinng(false);
+      });
+    }
+  };
 
   const handleOpenBook = () => {
     const page = modaldata.notebook_name?.match(/\d+/g).map(Number);
@@ -140,8 +152,8 @@ const PublicPage = (props) => {
       ...initState.nkscontributor,
       notebook_name: id,
       notebook_link: `https://tccup.s3.amazonaws.com/${id}.nb`,
-      status: "pending",
       notebook_chapter: activeChapter,
+      status: "untouched",
     };
     if (notebooks[id] && Object.keys(notebooks[id]).length) {
       setModalData(notebooks[id]);
@@ -166,11 +178,11 @@ const PublicPage = (props) => {
   const handleUploadChange = (e) => {
     e.target.value = e.target.value.replace(/[^0-9.]/g, "");
     const { name, value } = e.target;
-    if (value.length > 9) {
+    if (value.length > 6 || value.length < 6) {
       setErrors({ ...errors, [name]: true });
       setErrorMessages({
         ...errorMessages,
-        [name]: "Length of token exceeds maximum of 9 digits",
+        [name]: `Length of token ${value.length < 6 ? "below" : "exceeds"} maximum of 6 digits`,
       });
     } else {
       setErrors({ ...errors, [name]: false });
@@ -183,6 +195,14 @@ const PublicPage = (props) => {
     setErrors(initState.errors);
     setIsLinked(false);
     setToken("");
+    setUploadHasErrors(false);
+    setUploadSuccess(false);
+    setUMessage("");
+  };
+
+  const resetUploadData = () => {
+    setUploadPayload(initState.uploadPayload);
+    setErrors(initState.errors);
   };
 
   const handleSubmitNksContrib = () => {
@@ -195,7 +215,8 @@ const PublicPage = (props) => {
       setErrorMessages({ ...errorMessages, ...fieldsValidated[1] });
       return;
     }
-    nkscontributorAction(payload).then((res) => {
+    const newpayload = { ...payload, status: "pending" };
+    nkscontributorAction(newpayload).then((res) => {
       if (res.type === "nkscontributor/success") {
         setSelectedId(res.payload?.id);
         setModalData(res.payload);
@@ -211,6 +232,15 @@ const PublicPage = (props) => {
         setErrors({ ...parsedErrors });
       }
     });
+  };
+
+  const handleConfirmUpload = () => {
+    setOpenConfirm(true);
+  };
+
+  const handleCloseConfirm = () => {
+    setOpenConfirm(false);
+    resetUploadData();
   };
 
   return (
@@ -424,6 +454,9 @@ const PublicPage = (props) => {
                       </Typography>
                       <Typography variant="h5">Review process</Typography>
                       <Divider />
+                      <Typography>
+                        No information related to the review process yet.
+                      </Typography>
                     </Stack>
                   </Grid>
                 ) : (
@@ -501,21 +534,27 @@ const PublicPage = (props) => {
         <NKSC2CModal
           open={openModal}
           handleClose={handleCloseModal}
-          loading={false}
           handleChange={handleChange}
           errors={errors}
           errorMessages={errorMessages}
           isLinked={isLinked}
           handleCheckboxChange={handleCheckboxChange}
-          payload={payload}
           modaldata={modaldata}
-          setModalData={setModalData}
           resetData={resetData}
           selectedId={selectedId}
           handleOpenBook={handleOpenBook}
           handleSubmitNksContrib={handleSubmitNksContrib}
           token={token}
           handleUploadChange={handleUploadChange}
+          handleUpload={handleUpload}
+          disabledUpload={!uploadPayload.token || errors.token}
+          isUploading={isUploading}
+          openConfirm={openConfirm}
+          handleCloseConfirm={handleCloseConfirm}
+          handleConfirmUpload={handleConfirmUpload}
+          uploadHasErrors={uploadHasErrors}
+          uMessage={uMessage}
+          uploadSuccess={uploadSuccess}
         />
       </Layout>
     </React.Fragment>

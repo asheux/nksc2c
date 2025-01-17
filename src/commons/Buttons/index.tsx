@@ -1,3 +1,4 @@
+import React from "react";
 import Button, { ButtonProps } from "@mui/material/Button";
 
 import { styled } from "@mui/material/styles";
@@ -29,3 +30,28 @@ export const VisuallyHiddenInput = styled("input")({
   whiteSpace: "nowrap",
   width: 1,
 });
+
+export const CustomizedUpload = (props) => {
+  const { handleChange, disabled } = props;
+
+  return (
+    <Button
+      component="label"
+      role={undefined}
+      variant="contained"
+      tabIndex={-1}
+      fullWidth
+      disabled={disabled}
+      sx={{
+        color: "white",
+        backgroundColor: "#b00f00",
+        "&:hover": {
+          backgroundColor: "#b00f00",
+        },
+      }}
+    >
+      Continue
+      <VisuallyHiddenInput onChange={handleChange} type="file" accept=".nb" />
+    </Button>
+  );
+};
