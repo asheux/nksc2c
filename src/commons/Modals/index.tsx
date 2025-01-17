@@ -97,18 +97,26 @@ export const NKSC2CModal = (props) => {
             position: "absolute",
             right: 10,
             top: 10,
+            fontSize: isMobile ? 45 : 20,
           }}
         />
         <Stack>
           <Typography
-            variant={isMobile ? "h2" : "h4"}
+            variant={isMobile ? "h3" : "h4"}
             sx={{ color: "#b00f00" }}
           >
             {modaldata.name ? "NKS Click to Copy Code" : "Contribute Code"}
           </Typography>
           {modaldata.name ? (
             <Stack direction="row" spacing={0.5}>
-              <Typography variant="body2">Contributed by:</Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: isMobile ? 27 : 14,
+                }}
+              >
+                Contributed by:
+              </Typography>
               <NKSTooltip
                 title={
                   modaldata.social_link
@@ -123,6 +131,7 @@ export const NKSC2CModal = (props) => {
                     textTransform: "capitalize",
                     cursor: "pointer",
                     color: "#4da6ff",
+                    fontSize: isMobile ? 27 : 14,
                   }}
                 >
                   {modaldata.name}
@@ -152,6 +161,10 @@ export const NKSC2CModal = (props) => {
               borderRadius: 5,
               p: 1,
               color: "#fff",
+              height: isMobile ? 50 : 25,
+              ".MuiChip-label": {
+                fontSize: isMobile ? 27 : 14,
+              },
             }}
           />
         </Box>
@@ -431,7 +444,10 @@ export const NKSC2CModal = (props) => {
         >
           <Stack
             spacing={2}
-            sx={{ ...customStyles.tokenModal, position: "relative" }}
+            sx={{
+              ...customStyles.tokenModal,
+              position: "relative",
+            }}
           >
             <CloseIcon
               onClick={handleCloseConfirm}
@@ -441,6 +457,7 @@ export const NKSC2CModal = (props) => {
                 position: "absolute",
                 right: 10,
                 top: 10,
+                fontSize: isMobile ? 45 : 20,
               }}
             />
             <Stack direction="row" alignItems="center" spacing={0.2}>

@@ -3,6 +3,8 @@ import Button, { ButtonProps } from "@mui/material/Button";
 
 import { styled } from "@mui/material/styles";
 
+import { isMobile } from "src/helpers";
+
 export const StyledButton = styled(Button)<ButtonProps>(
   ({ theme, disabled }) => ({
     color: theme.palette.getContrastText("#000"),
@@ -45,6 +47,7 @@ export const CustomizedUpload = (props) => {
       sx={{
         color: "white",
         backgroundColor: "#b00f00",
+        fontSize: isMobile ? 25 : 12,
         "&:hover": {
           backgroundColor: "#b00f00",
         },

@@ -19,6 +19,7 @@ import { NKSC2CModal } from "src/commons/Modals";
 import { nksChapters, colorMap } from "src/helpers";
 import { validateInput } from "src/commons/Inputs/validation";
 import { parseErrorMessages, parseErrors } from "src/utils/parsePayload";
+import { isMobile } from "src/helpers";
 import initState from "src/redux/reducers/initState";
 
 const nksbookimage = "/images/nks-book.png";
@@ -70,7 +71,7 @@ const PublicPage = (props) => {
         token: uploadPayload.token,
       };
       uploadnksnbAction(pdata).then((res) => {
-        if (res.type === "uploadnksnb/failure") {
+        if (res.type === "nksc2cupload/failure") {
           setUploadHasErrors(true);
           setUMessage(res.payload);
         } else {
@@ -249,10 +250,10 @@ const PublicPage = (props) => {
         <Box sx={{ display: "flex", height: "100vh" }}>
           <Box
             sx={{
-              width: "350px",
+              width: 350,
               backgroundColor: "#feb55a",
               p: 2,
-              mt: 4,
+              mt: isMobile ? 18 : 4,
             }}
           >
             <Box sx={{ textAlign: "center", mt: 2 }}>
@@ -288,7 +289,7 @@ const PublicPage = (props) => {
                   <Stack direction="row" alignItems="center" spacing={1}>
                     <Typography
                       sx={{
-                        fontSize: 14,
+                        fontSize: isMobile ? 24 : 14,
                       }}
                     >
                       {nksc.id}
@@ -301,7 +302,7 @@ const PublicPage = (props) => {
                     />
                     <Typography
                       sx={{
-                        fontSize: 14,
+                        fontSize: isMobile ? 24 : 14,
                       }}
                     >
                       {nksc.label}
@@ -320,11 +321,15 @@ const PublicPage = (props) => {
               mt: 4,
             }}
           >
-            <Container sx={{ mt: 2, mb: 5 }}>
+            <Container sx={{ mt: isMobile ? 15 : 2, mb: 5 }}>
               <Grid container>
                 <Grid item xs={12}>
                   <Box sx={{ mb: 2 }}>
-                    <Typography variant="h5">
+                    <Typography
+                      sx={{
+                        fontSize: isMobile ? 28 : 25,
+                      }}
+                    >
                       {chapter.id === 0
                         ? `${chapter.label}`
                         : `Chapter ${chapter.id}: ${chapter.label}`}
@@ -344,9 +349,23 @@ const PublicPage = (props) => {
                         using the Wolfram Language, to contribute code that
                         reproduces the figures in the NKS book.
                       </Typography>
-                      <Typography variant="h5">Project Overview</Typography>
+                      <Typography
+                        variant="h5"
+                        sx={{
+                          fontWeight: 700,
+                          fontSize: isMobile ? 24 : 20,
+                        }}
+                      >
+                        Project Overview
+                      </Typography>
                       <Divider />
-                      <Typography>The project provides:</Typography>
+                      <Typography
+                        sx={{
+                          fontStyle: "italic",
+                        }}
+                      >
+                        The project provides:
+                      </Typography>
                       <ul>
                         <li>A way to download empty Mathematica notebook</li>
                         <li>A way to upload a notebook if work is done</li>
@@ -358,7 +377,13 @@ const PublicPage = (props) => {
                         <li>The name of the figure from NKS book</li>
                         <li>The status of the card/notebook</li>
                       </ul>
-                      <Typography>Statuses meaning:</Typography>
+                      <Typography
+                        sx={{
+                          fontStyle: "italic",
+                        }}
+                      >
+                        Statuses meaning:
+                      </Typography>
                       <Stack>
                         <Stack spacing={1} direction="row" alignItems="center">
                           <CancelIcon
@@ -366,9 +391,10 @@ const PublicPage = (props) => {
                             fontSize="small"
                             sx={{
                               color: colorMap.untouched,
+                              fontSize: isMobile ? 40 : 18,
                             }}
                           />
-                          <Typography>
+                          <Typography sx={{ fontSize: isMobile ? 20 : 14 }}>
                             Untouched - There is no contribution made on the
                             notebook. Free to accept contribution.
                           </Typography>
@@ -379,9 +405,10 @@ const PublicPage = (props) => {
                             fontSize="small"
                             sx={{
                               color: colorMap.pending,
+                              fontSize: isMobile ? 40 : 18,
                             }}
                           />
-                          <Typography>
+                          <Typography sx={{ fontSize: isMobile ? 20 : 14 }}>
                             Pending - A contributor has started working on the
                             notebook but not yet done.
                           </Typography>
@@ -392,9 +419,10 @@ const PublicPage = (props) => {
                             fontSize="small"
                             sx={{
                               color: colorMap.good,
+                              fontSize: isMobile ? 40 : 18,
                             }}
                           />
-                          <Typography>
+                          <Typography sx={{ fontSize: isMobile ? 20 : 14 }}>
                             Good - A contributor finished working on the
                             notebook and submitted for review.
                           </Typography>
@@ -405,9 +433,10 @@ const PublicPage = (props) => {
                             fontSize="small"
                             sx={{
                               color: colorMap.unapproved,
+                              fontSize: isMobile ? 40 : 18,
                             }}
                           />
-                          <Typography>
+                          <Typography sx={{ fontSize: isMobile ? 20 : 14 }}>
                             Unapproved - The code has been reviewed but changes
                             were not accepted.
                           </Typography>
@@ -418,9 +447,10 @@ const PublicPage = (props) => {
                             fontSize="small"
                             sx={{
                               color: colorMap.approved,
+                              fontSize: isMobile ? 40 : 18,
                             }}
                           />
-                          <Typography>
+                          <Typography sx={{ fontSize: isMobile ? 20 : 14 }}>
                             Approved - Review is done and changes have been
                             accepted to be deployed in the NKS book.
                           </Typography>
@@ -431,7 +461,15 @@ const PublicPage = (props) => {
                         untouched, no other contributor can work on it but can
                         download and see what has been done.
                       </Typography>
-                      <Typography variant="h5">How to contribute?</Typography>
+                      <Typography
+                        variant="h5"
+                        sx={{
+                          fontWeight: 700,
+                          fontSize: isMobile ? 24 : 20,
+                        }}
+                      >
+                        How to contribute?
+                      </Typography>
                       <Divider />
                       <Typography>
                         Click on any card with untouched status. A popup will
@@ -452,7 +490,14 @@ const PublicPage = (props) => {
                         sure not to change the name of the notebook because that
                         will mess up the cloud's link to the notebook.
                       </Typography>
-                      <Typography variant="h5">Review process</Typography>
+                      <Typography
+                        sx={{
+                          fontWeight: 700,
+                          fontSize: isMobile ? 24 : 20,
+                        }}
+                      >
+                        Review process
+                      </Typography>
                       <Divider />
                       <Typography>
                         No information related to the review process yet.
@@ -466,14 +511,14 @@ const PublicPage = (props) => {
                       <Box sx={{ mt: 2 }}>
                         <Typography
                           sx={{
-                            fontSize: 20,
+                            fontSize: isMobile ? 22 : 18,
                           }}
                         >
                           {`Section ${activeData[d].id}: ${activeData[d].name}`}
                         </Typography>
                         <Grid container sx={{ mt: 0.5, mb: 2 }} spacing={2}>
                           {activeData[d].c2cdata.map((c2c, index) => (
-                            <Grid item xs={3} sm={6} md={3} key={index}>
+                            <Grid item xs={3} sm={12} md={6} lg={3} key={index}>
                               <Box
                                 onClick={handleOpenModal}
                                 id={c2c}

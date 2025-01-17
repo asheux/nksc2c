@@ -11,7 +11,7 @@ export default {
       ...context,
       data: [],
     },
-    uploadnksnb: context,
+    nksc2cupload: context,
   },
   nkscontributor: {
     name: "",

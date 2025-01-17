@@ -47,7 +47,7 @@ export const customStyles = {
     bgcolor: "background.paper",
     boxShadow: 24,
     p: 3,
-    width: isMobile ? "95%" : 450,
+    width: isMobile ? "80%" : 450,
   },
   tokenModal: {
     position: "absolute" as const,
@@ -57,6 +57,6 @@ export const customStyles = {
     bgcolor: "background.paper",
     boxShadow: 24,
     p: 3,
-    width: isMobile ? "95%" : 300,
+    width: isMobile ? "50%" : 300,
   },
 };

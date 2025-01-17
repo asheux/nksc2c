@@ -8,7 +8,7 @@ import { uploadnksnbAction } from "src/redux/actions/nksuploadnb";
 const mapStateToProps = (state) => ({
   nkscontributor: state.nkscontributor,
   nksnotebooks: state.nksnotebooks,
-  nksc2cupload: state.uploadnksnb,
+  nksc2cupload: state.nksc2cupload,
 });
 export default connect(mapStateToProps, {
   nkscontributorAction,
