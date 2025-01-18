@@ -1,7 +1,7 @@
 import { getHost } from "src/api";
 
-export const getNKSNotebooks = () => {
-  const url = `${getHost()}/nksc2c_notebooks`;
+export const getNKSNotebooks = (payload) => {
+  const url = `${getHost()}/nksc2c_notebooks?pages=${payload}`;
   return fetch(url, {
     method: "GET",
     headers: {

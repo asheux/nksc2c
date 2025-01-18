@@ -20,10 +20,10 @@ import { nksChapters, colorMap } from "src/helpers";
 import { validateInput } from "src/commons/Inputs/validation";
 import { parseErrorMessages, parseErrors } from "src/utils/parsePayload";
 import { isMobile } from "src/helpers";
+import { useAppSelector } from "src/hooks";
 import initState from "src/redux/reducers/initState";
 
 const nksbookimage = "/images/nks-book.png";
-const images_json = "/json/images.json";
 
 const PublicPage = (props) => {
   const { nkscontributorAction, nksNotebooksAction, uploadnksnbAction } = props;
@@ -35,8 +35,7 @@ const PublicPage = (props) => {
     label: localStorage.chapter_label,
   });
   const [activeData, setActiveData] = useState({});
-  const [dataImage, setImageData] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [imageCache, setImageCache] = useState({});
   const [openModal, setOpenModal] = useState(false);
   const [isLinked, setIsLinked] = useState(false);
   const [errors, setErrors] = useState(initState.errors);
@@ -52,6 +51,9 @@ const PublicPage = (props) => {
   const [uMessage, setUMessage] = useState("");
   const [openConfirm, setOpenConfirm] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [selectedPageName, setSelectedPageName] = useState("");
+
+  const nksnotebooks = useAppSelector((state) => state.nksnotebooks);
 
   const handleUpload = (e) => {
     setIsUploadinng(true);
@@ -75,12 +77,13 @@ const PublicPage = (props) => {
           setUploadHasErrors(true);
           setUMessage(res.payload);
         } else {
+          const pixelData = JSON.parse(res.payload?.pixel_data);
           setUploadHasErrors(false);
           setUploadSuccess(true);
           setModalData(res.payload);
           setNotebooks({
             ...notebooks,
-            [res.payload.notebook_name]: res.payload,
+            [res.payload.page_name]: { ...res.payload, pixel_data: pixelData },
           });
           setUMessage(
             "Thank you for your contribution. Please wait for the review process to be done.",
@@ -104,30 +107,10 @@ const PublicPage = (props) => {
   };
 
   useEffect(() => {
-    nksNotebooksAction().then((res) => {
-      if (res.type === "nksnotebooks/success" && res.payload.data.length) {
-        const nbmap = {};
-        res.payload.data.forEach((nb) => {
-          nbmap[nb.notebook_name] = nb;
-        });
-        setNotebooks(nbmap);
-      }
-    });
-    if (!Object.keys(dataImage).length) {
-      setLoading(true);
-      fetch(images_json)
-        .then((response) => response.json())
-        .then((rgbData) => {
-          setLoading(false);
-          setImageData(rgbData);
-        });
-    }
-  }, []);
-
-  useEffect(() => {
     const data = nksChapters.filter((item) => item.value == activeChapter);
     if (data.length) {
-      setActiveData(data[0].data);
+      const nbdata = data[0].data;
+      setActiveData(nbdata);
       localStorage.setItem("chapter", data[0].value);
       localStorage.setItem("chapter_id", String(data[0].id));
       localStorage.setItem("chapter_label", data[0].label);
@@ -135,6 +118,26 @@ const PublicPage = (props) => {
         id: data[0].id,
         label: data[0].label,
       });
+      let parsedList = [];
+      Object.keys(nbdata).map((section) => {
+        const _nbdata = nbdata[section].c2cdata?.map((d) => {
+          return splitString(d);
+        });
+        parsedList = [...parsedList, ..._nbdata];
+      });
+      if (!imageCache[activeChapter]) {
+        nksNotebooksAction(parsedList).then((res) => {
+          if (res.type === "nksnotebooks/success" && res.payload.data.length) {
+            const nbmap = {};
+            res.payload.data.forEach((nb) => {
+              const pixelData = JSON.parse(nb.pixel_data);
+              nbmap[nb.page_name] = { ...nb, pixel_data: pixelData };
+            });
+            setImageCache({ ...imageCache, [activeChapter]: nbmap });
+            setNotebooks({ ...notebooks, ...nbmap });
+          }
+        });
+      }
     }
   }, [activeChapter]);
 
@@ -150,20 +153,20 @@ const PublicPage = (props) => {
     setOpenModal(true);
     const id = e.currentTarget.getAttribute("id");
     const ndata = {
-      ...initState.nkscontributor,
       notebook_name: id,
       notebook_link: `https://tccup.s3.amazonaws.com/${id}.nb`,
       notebook_chapter: activeChapter,
-      status: "untouched",
     };
-    if (notebooks[id] && Object.keys(notebooks[id]).length) {
-      setModalData(notebooks[id]);
-      setSelectedId(notebooks[id].id);
+    const pageName = splitString(id);
+    if (notebooks[pageName]?.notebook_name) {
+      setModalData(notebooks[pageName]);
+      setSelectedId(notebooks[pageName].id);
     } else {
       setPayload({ ...payload, ...ndata });
-      setModalData({ ...modaldata, ...ndata });
+      setModalData({ ...notebooks[pageName], ...ndata });
       setSelectedId(null);
     }
+    setSelectedPageName(pageName);
   };
 
   const handleCheckboxChange = (e) => {
@@ -216,15 +219,16 @@ const PublicPage = (props) => {
       setErrorMessages({ ...errorMessages, ...fieldsValidated[1] });
       return;
     }
-    const newpayload = { ...payload, status: "pending" };
+    const newpayload = { ...payload, page_name: selectedPageName };
     nkscontributorAction(newpayload).then((res) => {
       if (res.type === "nkscontributor/success") {
+        const pixelData = JSON.parse(res.payload?.pixel_data);
         setSelectedId(res.payload?.id);
         setModalData(res.payload);
         setToken(res.payload?.token);
         setNotebooks({
           ...notebooks,
-          [res.payload.notebook_name]: res.payload,
+          [res.payload.page_name]: { ...res.payload, pixel_data: pixelData },
         });
       } else {
         const parsedErrorMessages = parseErrorMessages(res?.payload);
@@ -250,7 +254,7 @@ const PublicPage = (props) => {
         <Box sx={{ display: "flex", height: "100vh" }}>
           <Box
             sx={{
-              width: 350,
+              width: isMobile ? 100 : 350,
               backgroundColor: "#feb55a",
               p: 2,
               mt: isMobile ? 18 : 4,
@@ -294,19 +298,16 @@ const PublicPage = (props) => {
                     >
                       {nksc.id}
                     </Typography>
-                    <Divider
-                      className="divider"
-                      orientation="vertical"
-                      variant="middle"
-                      flexItem
-                    />
-                    <Typography
-                      sx={{
-                        fontSize: isMobile ? 24 : 14,
-                      }}
-                    >
-                      {nksc.label}
-                    </Typography>
+                    <Divider orientation="vertical" variant="middle" flexItem />
+                    {!isMobile && (
+                      <Typography
+                        sx={{
+                          fontSize: isMobile ? 24 : 14,
+                        }}
+                      >
+                        {nksc.label}
+                      </Typography>
+                    )}
                   </Stack>
                 </Box>
               ))}
@@ -528,25 +529,27 @@ const PublicPage = (props) => {
                                   cursor: "pointer",
                                   border: "1px solid lightgray",
                                   "&:hover": {
-                                    border: `1px solid ${notebooks[c2c]?.status ? colorMap[notebooks[c2c]?.status] : colorMap.untouched}`,
+                                    border: `1px solid ${notebooks[splitString(c2c)]?.status ? colorMap[notebooks[splitString(c2c)]?.status] : colorMap.untouched}`,
                                   },
                                   position: "relative",
                                 }}
                               >
                                 <PageStatus
                                   status={
-                                    notebooks[c2c]?.status
-                                      ? notebooks[c2c]?.status
+                                    notebooks[splitString(c2c)]?.status
+                                      ? notebooks[splitString(c2c)]?.status
                                       : "untouched"
                                   }
                                 />
-                                {loading ? (
+                                {nksnotebooks.loading ? (
                                   <Box sx={{ padding: 2 }}>
                                     <Loader size={50} numberOfBars={4} />
                                   </Box>
-                                ) : Object.keys(dataImage).length ? (
+                                ) : Object.keys(notebooks).length ? (
                                   <ImageCanvas
-                                    rgbData={dataImage[splitString(c2c)]}
+                                    rgbData={
+                                      notebooks[splitString(c2c)]?.pixel_data
+                                    }
                                     imageKey={c2c}
                                   />
                                 ) : (

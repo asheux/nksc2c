@@ -1,11 +1,11 @@
 import { getNKSNotebooks } from "./nksnotebooks.api";
 import { nksNotebooksSlice } from "src/redux/reducers/nksnotebooks";
 
-export const nksNotebooksAction = () => (dispatch) => {
+export const nksNotebooksAction = (payload) => (dispatch) => {
   const { request, failure, success } = nksNotebooksSlice.actions;
 
   dispatch(request());
-  return getNKSNotebooks()
+  return getNKSNotebooks(payload)
     .then((res) => {
       if (res?.error) {
         return dispatch(failure(res.error));

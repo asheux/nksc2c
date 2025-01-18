@@ -161,7 +161,7 @@ export const NKSC2CModal = (props) => {
               borderRadius: 5,
               p: 1,
               color: "#fff",
-              height: isMobile ? 50 : 25,
+              height: isMobile ? 50 : 35,
               ".MuiChip-label": {
                 fontSize: isMobile ? 27 : 14,
               },
