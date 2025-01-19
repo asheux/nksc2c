@@ -293,7 +293,7 @@ const PublicPage = (props) => {
                   <Stack direction="row" alignItems="center" spacing={1}>
                     <Typography
                       sx={{
-                        fontSize: isMobile ? 24 : 14,
+                        fontSize: isMobile ? 27 : 14,
                       }}
                     >
                       {nksc.id}
@@ -328,7 +328,7 @@ const PublicPage = (props) => {
                   <Box sx={{ mb: 2 }}>
                     <Typography
                       sx={{
-                        fontSize: isMobile ? 28 : 25,
+                        fontSize: isMobile ? 35 : 25,
                       }}
                     >
                       {chapter.id === 0
@@ -363,16 +363,24 @@ const PublicPage = (props) => {
                       <Typography
                         sx={{
                           fontStyle: "italic",
+                          fontSize: isMobile ? 22 : 18,
                         }}
                       >
                         The project provides:
                       </Typography>
                       <ul>
-                        <li>A way to download empty Mathematica notebook</li>
+                        <li>A way to download a Mathematica notebook</li>
                         <li>A way to upload a notebook if work is done</li>
                         <li>A link to NKS page the figure lives</li>
                       </ul>
-                      <Typography>Each card on every page has:</Typography>
+                      <Typography
+                        sx={{
+                          fontStyle: "italic",
+                          fontSize: isMobile ? 22 : 18,
+                        }}
+                      >
+                        Each card on every page has:
+                      </Typography>
                       <ul>
                         <li>An image of the figure to reproduce</li>
                         <li>The name of the figure from NKS book</li>
@@ -381,6 +389,7 @@ const PublicPage = (props) => {
                       <Typography
                         sx={{
                           fontStyle: "italic",
+                          fontSize: isMobile ? 22 : 18,
                         }}
                       >
                         Statuses meaning:
@@ -395,9 +404,9 @@ const PublicPage = (props) => {
                               fontSize: isMobile ? 40 : 18,
                             }}
                           />
-                          <Typography sx={{ fontSize: isMobile ? 20 : 14 }}>
+                          <Typography sx={{ fontSize: isMobile ? 20 : 16 }}>
                             Untouched - There is no contribution made on the
-                            notebook. Free to accept contribution.
+                            notebook. Free to accept contributions.
                           </Typography>
                         </Stack>
                         <Stack spacing={1} direction="row" alignItems="center">
@@ -409,7 +418,7 @@ const PublicPage = (props) => {
                               fontSize: isMobile ? 40 : 18,
                             }}
                           />
-                          <Typography sx={{ fontSize: isMobile ? 20 : 14 }}>
+                          <Typography sx={{ fontSize: isMobile ? 20 : 16 }}>
                             Pending - A contributor has started working on the
                             notebook but not yet done.
                           </Typography>
@@ -423,7 +432,7 @@ const PublicPage = (props) => {
                               fontSize: isMobile ? 40 : 18,
                             }}
                           />
-                          <Typography sx={{ fontSize: isMobile ? 20 : 14 }}>
+                          <Typography sx={{ fontSize: isMobile ? 20 : 16 }}>
                             Good - A contributor finished working on the
                             notebook and submitted for review.
                           </Typography>
@@ -437,7 +446,7 @@ const PublicPage = (props) => {
                               fontSize: isMobile ? 40 : 18,
                             }}
                           />
-                          <Typography sx={{ fontSize: isMobile ? 20 : 14 }}>
+                          <Typography sx={{ fontSize: isMobile ? 20 : 16 }}>
                             Unapproved - The code has been reviewed but changes
                             were not accepted.
                           </Typography>
@@ -451,7 +460,7 @@ const PublicPage = (props) => {
                               fontSize: isMobile ? 40 : 18,
                             }}
                           />
-                          <Typography sx={{ fontSize: isMobile ? 20 : 14 }}>
+                          <Typography sx={{ fontSize: isMobile ? 20 : 16 }}>
                             Approved - Review is done and changes have been
                             accepted to be deployed in the NKS book.
                           </Typography>
@@ -480,7 +489,7 @@ const PublicPage = (props) => {
                         name and optionally, your social link), then click
                         "Start work on the notebook": this will change the
                         notebook status to pending and assign you as the
-                        notebook contributor. After saving your details, a 9
+                        notebook contributor. After saving your details, a 6
                         digit number (token) will be provided to you. This token
                         will be required to upload the notebook. Please ensure
                         to save it before exiting the popup.
@@ -512,7 +521,7 @@ const PublicPage = (props) => {
                       <Box sx={{ mt: 2 }}>
                         <Typography
                           sx={{
-                            fontSize: isMobile ? 22 : 18,
+                            fontSize: isMobile ? 20 : 18,
                           }}
                         >
                           {`Section ${activeData[d].id}: ${activeData[d].name}`}
@@ -545,25 +554,20 @@ const PublicPage = (props) => {
                                   <Box sx={{ padding: 2 }}>
                                     <Loader size={50} numberOfBars={4} />
                                   </Box>
-                                ) : Object.keys(notebooks).length ? (
+                                ) : (
                                   <ImageCanvas
                                     rgbData={
                                       notebooks[splitString(c2c)]?.pixel_data
                                     }
                                     imageKey={c2c}
                                   />
-                                ) : (
-                                  <Typography
-                                    variant="body2"
-                                    color="text.secondary"
-                                  >
-                                    No image
-                                  </Typography>
                                 )}
                                 <Typography
                                   variant="body2"
                                   color="text.secondary"
-                                  sx={{ fontStyle: "italic" }}
+                                  sx={{
+                                    fontStyle: "italic",
+                                  }}
                                 >
                                   {c2c}
                                 </Typography>

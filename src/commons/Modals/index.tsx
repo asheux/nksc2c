@@ -399,7 +399,7 @@ export const NKSC2CModal = (props) => {
               border: "1px solid #b00f00",
             }}
           >
-            Download notebook
+            {`Download ${modaldata.name ? "notebook" : "template"}`}
           </StyledButton>
           <StyledButton
             onClick={handleConfirmUpload}
