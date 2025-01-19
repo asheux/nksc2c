@@ -342,16 +342,12 @@ export const NKSC2CModal = (props) => {
             <Divider />
             <Stack>
               <Typography variant="h4">{token}</Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{
-                  fontSize: isMobile ? 27 : 14,
-                  color: "green",
-                }}
-              >
-                Save this upload token to use during notebook upload.
-              </Typography>
+              <ShowError
+                show={true}
+                message="Save this upload token to use during notebook upload."
+                showBorder={true}
+                color="green"
+              />
             </Stack>
           </>
         )}
