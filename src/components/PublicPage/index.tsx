@@ -1,5 +1,6 @@
 // External imports
 import React, { useState, useEffect } from "react";
+import JSZip from "jszip";
 import {
   Grid,
   Container,
@@ -55,7 +56,7 @@ const PublicPage = (props) => {
 
   const nksnotebooks = useAppSelector((state) => state.nksnotebooks);
 
-  const handleUpload = (e) => {
+  const handleUpload = async (e) => {
     setIsUploadinng(true);
     const file = e.target.files[0];
     if (!file) {
@@ -67,9 +68,15 @@ const PublicPage = (props) => {
       });
     } else {
       handleCloseConfirm();
+      const zip = new JSZip();
+      zip.file(file.name, file);
+      const zipBlob = await zip.generateAsync({ type: "blob" });
+      const newFile = new File([zipBlob], `${file.name}.zip`, {
+        type: "application/zip",
+      });
       const pdata = {
         notebook_name: modaldata.notebook_name,
-        file: file,
+        file: newFile,
         token: uploadPayload.token,
       };
       uploadnksnbAction(pdata).then((res) => {
