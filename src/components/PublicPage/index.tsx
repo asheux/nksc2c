@@ -561,13 +561,15 @@ const PublicPage = (props) => {
                                   position: "relative",
                                 }}
                               >
-                                <PageStatus
-                                  status={
-                                    notebooks[splitString(c2c)]?.status
-                                      ? notebooks[splitString(c2c)]?.status
-                                      : "untouched"
-                                  }
-                                />
+                                {!nksnotebooks.loading && (
+                                  <PageStatus
+                                    status={
+                                      notebooks[splitString(c2c)]?.status
+                                        ? notebooks[splitString(c2c)]?.status
+                                        : "untouched"
+                                    }
+                                  />
+                                )}
                                 {nksnotebooks.loading ? (
                                   <Box sx={{ padding: 2 }}>
                                     <Loader size={50} numberOfBars={4} />
