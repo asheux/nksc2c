@@ -5,6 +5,7 @@ export const uploadNKSNotebook = (data) => {
   formData.set("file", data.file);
   formData.set("token", data.token);
   formData.set("notebook_name", data.notebook_name);
+  formData.set("status", data.status);
   return fetch(`${getHost()}/uploadnksnotebook`, {
     method: "POST",
     headers: {

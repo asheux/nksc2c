@@ -78,6 +78,7 @@ const PublicPage = (props) => {
         notebook_name: modaldata.notebook_name,
         file: newFile,
         token: uploadPayload.token,
+        status: modaldata.status,
       };
       uploadnksnbAction(pdata).then((res) => {
         if (res.type === "nksc2cupload/failure") {
@@ -255,6 +256,10 @@ const PublicPage = (props) => {
     resetUploadData();
   };
 
+  const handleOpenWI = () => {
+    window.open("https://wolframinstitute.org/", "_blank");
+  };
+
   return (
     <React.Fragment>
       <Layout {...props}>
@@ -349,13 +354,19 @@ const PublicPage = (props) => {
                     <Stack spacing={1}>
                       <Divider />
                       <Typography sx={{ mt: 2 }}>
-                        Click to Copy is a project initiative by the Wolfram
-                        Institute to modernize the code used to create the
-                        figures from Stephen Wolfram’s A New Kind of Science
-                        (NKS) book. This site was inspired by the initiative
-                        with the goal of empowering students and professionals,
-                        using the Wolfram Language, to contribute code that
-                        reproduces the figures in the NKS book.
+                        Click to Copy is a project initiative by the{" "}
+                        <span
+                          style={{ color: "blue", cursor: "pointer" }}
+                          onClick={handleOpenWI}
+                        >
+                          Wolfram Institute
+                        </span>{" "}
+                        to modernize the code used to create the figures from
+                        Stephen Wolfram’s A New Kind of Science (NKS) book. This
+                        site was inspired by the initiative with the goal of
+                        empowering students and professionals, using the Wolfram
+                        Language, to contribute code that reproduces the figures
+                        in the NKS book.
                       </Typography>
                       <Typography
                         variant="h5"
@@ -614,6 +625,7 @@ const PublicPage = (props) => {
           uploadHasErrors={uploadHasErrors}
           uMessage={uMessage}
           uploadSuccess={uploadSuccess}
+          setModalData={setModalData}
         />
       </Layout>
     </React.Fragment>
