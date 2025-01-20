@@ -47,7 +47,6 @@ export const NKSC2CModal = (props) => {
     uploadHasErrors,
     uMessage,
     uploadSuccess,
-    setModalData,
   } = props;
   const [openForm, setOpenForm] = useState(false);
 
@@ -70,10 +69,6 @@ export const NKSC2CModal = (props) => {
 
   const handleNotebookDownload = () => {
     window.open(modaldata.notebook_link);
-  };
-
-  const markAsApproved = () => {
-    setModalData({ ...modaldata, status: "approved" });
   };
 
   return (
@@ -135,7 +130,7 @@ export const NKSC2CModal = (props) => {
                   sx={{
                     textTransform: "capitalize",
                     cursor: "pointer",
-                    color: "blue",
+                    color: "#64aafa",
                     fontSize: isMobile ? 27 : 14,
                   }}
                 >
@@ -190,7 +185,7 @@ export const NKSC2CModal = (props) => {
           <Stack
             direction="row"
             sx={{
-              color: "blue",
+              color: "#64aafa",
             }}
           >
             <Typography
@@ -334,7 +329,7 @@ export const NKSC2CModal = (props) => {
                         borderRadius: 0,
                       }}
                     >
-                      Start work on the notebook
+                      Start work on this notebook
                     </StyledButton>
                   </Box>
                 </Stack>
@@ -378,11 +373,6 @@ export const NKSC2CModal = (props) => {
           showBorder={true}
           color={uploadHasErrors ? "red" : "green"}
         />
-        {modaldata.status === "pending" && (
-          <StyledButton onClick={markAsApproved} sx={{ width: 150 }}>
-            Approved
-          </StyledButton>
-        )}
         <Box>
           <StyledButton
             onClick={handleNotebookDownload}
@@ -409,7 +399,7 @@ export const NKSC2CModal = (props) => {
           </StyledButton>
           <StyledButton
             onClick={handleConfirmUpload}
-            disabled={!modaldata.name}
+            disabled={!modaldata.name || modaldata.status === "approved"}
             startIcon={
               isUploading ? (
                 <CircularProgress

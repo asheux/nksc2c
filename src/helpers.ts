@@ -1299,7 +1299,7 @@ export const colorMap = {
 export const statusMap = {
   pending: "Work in progress",
   good: "In review process",
-  approved: "Approved for deployment",
+  approved: "Approved",
   unapproved: "Needs more work",
   untouched: "Open for new contributions",
 };

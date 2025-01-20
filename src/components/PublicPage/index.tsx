@@ -625,7 +625,6 @@ const PublicPage = (props) => {
           uploadHasErrors={uploadHasErrors}
           uMessage={uMessage}
           uploadSuccess={uploadSuccess}
-          setModalData={setModalData}
         />
       </Layout>
     </React.Fragment>
