@@ -13,12 +13,17 @@ export const workerCode = `
             if (!isNaN(rgb)) {
               rgb = [rgb, rgb,rgb]
             }
-            const [r, g, b] = rgb;
+            let r = g = b = e = 255;
+            if (rgb?.length === 3) {
+              [r, g, b] = rgb;
+            } else if (rgb?.length === 4) {
+              [r, g, b, e] = rgb;
+            }
 
             imageDataArray[index++] = r;
             imageDataArray[index++] = g;
             imageDataArray[index++] = b;
-            imageDataArray[index++] = 255;
+            imageDataArray[index++] = e;
           }
         }
 

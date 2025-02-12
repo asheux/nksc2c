@@ -19,6 +19,7 @@ import { NKSTooltip } from "src/commons/Tooltip";
 import { customStyles } from "src/styles";
 import { isMobile, statusMap, colorMap } from "src/helpers";
 import { useAppSelector } from "src/hooks";
+import { AWS_S3 } from "src/api";
 
 const mathematica_icon = "/icons/mathematica.svg";
 
@@ -68,7 +69,7 @@ export const NKSC2CModal = (props) => {
   };
 
   const handleNotebookDownload = () => {
-    window.open(modaldata.notebook_link);
+    window.open(`${AWS_S3}/${modaldata.notebook_name}.nb`);
   };
 
   return (
@@ -337,16 +338,20 @@ export const NKSC2CModal = (props) => {
             )}
           </>
         )}
-        {token && (
+        {(token || uploadHasErrors || uploadSuccess) && (
           <>
             <Divider />
             <Stack>
               <Typography variant="h4">{token}</Typography>
               <ShowError
-                show={true}
-                message="Save this upload token to use during notebook upload."
+                show={!!token || uploadSuccess || uploadHasErrors}
+                message={
+                  uploadSuccess || uploadHasErrors
+                    ? uMessage
+                    : "Save this upload token to use during notebook upload."
+                }
                 showBorder={true}
-                color="green"
+                color={uploadHasErrors ? "red" : "green"}
               />
             </Stack>
           </>
@@ -367,12 +372,6 @@ export const NKSC2CModal = (props) => {
             <InfoIcon sx={{ fontSize: isMobile ? 27 : 18, color: "#b00f00" }} />
           </NKSTooltip>
         </Stack>
-        <ShowError
-          show={uploadSuccess || uploadHasErrors}
-          message={uMessage}
-          showBorder={true}
-          color={uploadHasErrors ? "red" : "green"}
-        />
         <Box>
           <StyledButton
             onClick={handleNotebookDownload}
@@ -429,7 +428,7 @@ export const NKSC2CModal = (props) => {
               border: "1px solid #b00f00",
             }}
           >
-            Upload notebook
+            {isUploading ? "Uploading" : "Upload"} notebook
           </StyledButton>
         </Box>
         <Modal

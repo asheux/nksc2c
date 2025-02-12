@@ -1,5 +1,5 @@
 // External imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import JSZip from "jszip";
 import {
   Grid,
@@ -53,6 +53,7 @@ const PublicPage = (props) => {
   const [openConfirm, setOpenConfirm] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [selectedPageName, setSelectedPageName] = useState("");
+  const mainContentRef = useRef<HTMLDivElement>(null);
 
   const nksnotebooks = useAppSelector((state) => state.nksnotebooks);
 
@@ -115,6 +116,9 @@ const PublicPage = (props) => {
   };
 
   useEffect(() => {
+    if (mainContentRef.current) {
+      mainContentRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    }
     const data = nksChapters.filter((item) => item.value == activeChapter);
     if (data.length) {
       const nbdata = data[0].data;
@@ -150,7 +154,11 @@ const PublicPage = (props) => {
   }, [activeChapter]);
 
   const splitString = (string) => {
-    return string.split("_")[0];
+    if (string === "page0026a-fractal") {
+      return string.split("-")[0];
+    } else {
+      return string.split("_")[0];
+    }
   };
 
   const handleCloseModal = () => {
@@ -162,7 +170,7 @@ const PublicPage = (props) => {
     const id = e.currentTarget.getAttribute("id");
     const ndata = {
       notebook_name: id,
-      notebook_link: `https://tccup.s3.amazonaws.com/${id}.nb`,
+      notebook_link: `https://tccup.s3.us-east-1.amazonaws.com/${id}.nb`,
       notebook_chapter: activeChapter,
     };
     const pageName = splitString(id);
@@ -326,6 +334,7 @@ const PublicPage = (props) => {
             </Stack>
           </Box>
           <Box
+            ref={mainContentRef}
             sx={{
               flexGrow: 1,
               overflowY: "auto",
