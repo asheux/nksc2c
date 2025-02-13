@@ -131,7 +131,7 @@ export const NKSC2CModal = (props) => {
                   sx={{
                     textTransform: "capitalize",
                     cursor: "pointer",
-                    color: "#64aafa",
+                    color: "#b00f00",
                     fontSize: isMobile ? 27 : 14,
                   }}
                 >
@@ -186,7 +186,7 @@ export const NKSC2CModal = (props) => {
           <Stack
             direction="row"
             sx={{
-              color: "#64aafa",
+              color: "#b00f00",
             }}
           >
             <Typography
