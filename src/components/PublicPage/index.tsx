@@ -365,7 +365,7 @@ const PublicPage = (props) => {
                       <Typography sx={{ mt: 2 }}>
                         Click to Copy is a project initiative by the{" "}
                         <span
-                          style={{ color: "blue", cursor: "pointer" }}
+                          style={{ color: "#b00f00", cursor: "pointer" }}
                           onClick={handleOpenWI}
                         >
                           Wolfram Institute
